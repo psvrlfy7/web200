@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>While Loop</title>
+</head>
+<body>
+
+    <h1>Countdown</h1>
+    <div id="countdown"></div>
+
+    <script>
+        let number = 5;
+        let content = "";
+
+        while (number > 0) {
+            if (number === 2) {
+                break;
+            }
+
+            content += "<p>" + number + "</p>";
+            number--;
+        }
+
+        document.getElementById("countdown").innerHTML = content;
+    </script>
+
+</body>
+</html>
