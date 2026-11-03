@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Car Collection</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            margin-top: 25px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>My Car Collection</h1>
+
+    <div id="cars"></div>
+
+    <script>
+        class Car {
+            constructor(brand, model, year, color, price) {
+                this.brand = brand;
+                this.model = model;
+                this.year = year;
+                this.color = color;
+                this.price = price;
+            }
+            getInfo() {
+                return `${this.brand} ${this.model} (${this.year})`;
+            }
+
+            start() {
+                return `${this.brand} ${this.model} is starting!`;
+            }
+        }
+        const car1 = new Car("Toyota", "Camry", 2022, "Black", 20000);
+        const car2 = new Car("BMW", "M3", 2023, "White", 55000);
+        const car3 = new Car("Honda", "Civic", 2021, "Blue", 18000);
+
+        const cars = [car1, car2, car3];
+
+        const carsContainer = document.getElementById("cars");
+
+        carsContainer.innerHTML = `
+            <table>
+                <tr>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Year</th>
+                    <th>Color</th>
+                    <th>Price</th>
+                    <th>Information</th>
+                    <th>Status</th>
+                </tr>
+
+                ${cars.map(car => `
+                    <tr>
+                        <td>${car.brand}</td>
+                        <td>${car.model}</td>
+                        <td>${car.year}</td>
+                        <td>${car.color}</td>
+                        <td>$${car.price.toLocaleString()}</td>
+                        <td>${car.getInfo()}</td>
+                        <td>${car.start()}</td>
+                    </tr>
+                `).join("")}
+            </table>
+        `;
+    </script>
+
+</body>
+</html>
+
