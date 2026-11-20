@@ -1,1 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #2878c7;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #success {
+            color: green;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Registration Form</h1>
+
+    <form id="myForm">
+
+        <label>First Name</label>
+        <input type="text" id="firstName" placeholder="Enter first name">
+        <span class="error" id="firstNameError"></span>
+
+        <label>Last Name</label>
+        <input type="text" id="lastName" placeholder="Enter last name">
+        <span class="error" id="lastNameError"></span>
+
+        <label>Phone Number</label>
+        <input type="tel" id="phone" placeholder="Enter phone number">
+        <span class="error" id="phoneError"></span>
+
+        <label>Email</label>
+        <input type="text" id="email" placeholder="Enter email">
+        <span class="error" id="emailError"></span>
+
+        <label>Address</label>
+        <input type="text" id="address" placeholder="Enter address">
+        <span class="error" id="addressError"></span>
+
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter password">
+        <span class="error" id="passwordError"></span>
+
+        <label>Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm password">
+        <span class="error" id="confirmPasswordError"></span>
+
+        <button type="submit">Register</button>
+
+        <p id="success"></p>
+
+    </form>
+
+</div>
+
+<script>
+
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        let valid = true;
+
+        let firstName = document.getElementById("firstName").value.trim();
+        let lastName = document.getElementById("lastName").value.trim();
+        let phone = document.getElementById("phone").value.trim();
+        let email = document.getElementById("email").value.trim();
+        let address = document.getElementById("address").value.trim();
+        let password = document.getElementById("password").value;
+        let confirmPassword = document.getElementById("confirmPassword").value;
+
+        document.querySelectorAll(".error").forEach(function(error) {
+            error.textContent = "";
+        });
+
+        document.getElementById("success").textContent = "";
+
+        if (firstName === "") {
+            document.getElementById("firstNameError").textContent = "First name is required";
+            valid = false;
+        }
+
+        if (lastName === "") {
+            document.getElementById("lastNameError").textContent = "Last name is required";
+            valid = false;
+        }
+        if (phone === "") {
+            document.getElementById("phoneError").textContent = "Phone is required";
+            valid = false;
+        } else if (!/^[0-9+\-() ]{7,20}$/.test(phone)) {
+            document.getElementById("phoneError").textContent = "Enter a valid phone number";
+            valid = false;
+        }
+
+        if (email === "") {
+            document.getElementById("emailError").textContent = "Email is required";
+            valid = false;
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            document.getElementById("emailError").textContent = "Invalid email format";
+            valid = false;
+        }
+
+        if (address === "") {
+            document.getElementById("addressError").textContent = "Address is required";
+            valid = false;
+        }
+
+        if (password.length < 8) {
+            document.getElementById("passwordError").textContent = "At least 8 characters required";
+            valid = false;
+        } else if (!/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[0-9]/.test(password)) {
+            document.getElementById("passwordError").textContent = "Use uppercase, lowercase and a number";
+            valid = false;
+        }
+
+        if (confirmPassword === "") {
+            document.getElementById("confirmPasswordError").textContent = "Confirm your password";
+            valid = false;
+        } else if (password !== confirmPassword) {
+            document.getElementById("confirmPasswordError").textContent = "Passwords do not match";
+            valid = false;
+        }
+        if (valid) {
+            document.getElementById("success").textContent = "Registration successful!";
+            this.reset();
+        }
+
+    });
+
+</script>
+</body>
+</html>
